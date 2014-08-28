@@ -1,0 +1,99 @@
+/**
+ *@author oawofeso
+ */
+
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Arrays;
+
+public class Controller implements Observer{
+    
+    private static final String HOST = "pc.cs.purdue.edu";
+    private static final int PORT = 1337;
+    private static final String CONNECT_STRING = "connect monitor";
+    private Connector connector;
+    private Model model;
+    
+    public Controller () {
+        connector = new Connector(HOST, PORT, CONNECT_STRING, this);
+        model = new Model();
+    }
+    
+    public void update(Observable arg1, Object arg2) {
+        
+        String message = (String) arg2;
+        System.out.println(message);
+
+    }
+    
+    public void parseMessage(String message) {
+        String[] messageArray = message.split(" ");
+        
+        synchronized (model.lock) {
+            switch (messageArray[0]) {
+                case "location":
+                    locationMessageHandler(messageArray);
+                    break;
+                case "volunteer":
+                    volunteerMessageHandler(messageArray);
+                    break;
+                case "request":
+                    //requestMessageHandler(messageArray);
+                    break;
+                case "moving":
+                    //moveMessageHandler(messageArray);
+                    break;
+                case "walking":
+                    //walkMessageHandler(messageArray);
+                    break;
+                case "delete":
+                    //deleteMessageHandler(messageArray);
+                    break;
+                case "warning":
+                    //warningMessageHandler(messageArray);
+                    break;
+                case "error":
+                    //errorMessageHandler(messageArray);
+                    break;
+                default:
+                    //do nothing I guess
+            }
+        }
+        
+    }
+
+    public void locationMessageHandler(String[] messageArray) {
+        double x = Double.parseDouble(messageArray[2]);
+        double y = Double.parseDouble(messageArray[3]);
+        Location newLocation = new Location(model, messageArray[1], x, y);
+        model.addLocation(newLocation);
+    }
+    public void volunteerMessageHandler(String[] messageArray) {    
+        int score = Integer.parseInt(messageArray[3]);
+        Location location = model.getLocationByName(messageArray[2]);
+        Volunteer newVolunteer = new Volunteer(model, messageArray[1], score, location);
+        model.addVolunteer(newVolunteer);
+    }
+    public void requestMessageHandler(String[] messageArray) { 
+        int value = Integer.parseInt(messageArray[4]);
+        Location start = model.getLocationByName(messageArray[2]);
+        Location destination = model.getLocationByName(messageArray[3]);
+        Request newRequest = new Request(model, messageArray[1], start, destination, value);
+        model.addRequest(newRequest);
+    }
+    public void movingMessageHandler(String[] messageArray) {
+        Volunteer volunteer = model.getVolunteerByName(messageArray[1]);
+        Location destination = model.getLocationByName(messageArray[2]);
+        long timeReq = 
+        //startMoving(Location destination, long timeReq) {
+        Request newRequest = new Request(model, messageArray[1], start, destination, value);
+        model.addRequest(newRequest);
+    }
+    
+    public static void main(String[] args) {
+        Controller c = new Controller();
+        
+        
+    }
+}

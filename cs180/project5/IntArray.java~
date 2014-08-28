@@ -1,0 +1,65 @@
+
+/**
+ * An implementation of {@link IntArray} that uses an array.
+ */
+public class IntArray implements IntSequence {
+
+	int[] a;
+
+	public IntArray(int size) { // Note: do *not* change constructor parameters
+		a = new int[size];
+	}
+
+	@Override
+	public int length() {
+		return a.length;
+	}
+
+	@Override
+	public int get(int index) {
+		return a[index];
+	}
+
+	@Override
+	public void set(int index, int value) {
+		a[index] = value;
+	}
+
+	@Override
+	public IntSequence subSequence(int index, int size) {
+		// TODO implement
+		return null;
+	}
+
+	// Driver program - feel free to change it as it won't be tested
+	public static void main(String[] args) {
+		IntSequence a = new IntArray(5);
+		a.set(0, 0);
+		a.set(1, 10);
+		a.set(2, 20);
+		a.set(3, 30);
+		a.set(4, 40);
+
+		System.out.println("Initial array");
+		System.out.println("size: " + a.length());
+		for (int i = 0; i < 5; ++i)
+			System.out.println("a[" + i + "]: " + a.get(i));
+
+		System.out.println("Creating subarray (2, 2)");
+		IntSequence s = a.subSequence(2, 2);
+		System.out.println("s.size: " + s.length());
+
+		System.out.println("Multiplying subarray's last element");
+		s.set(1, s.get(1) * 10);
+		System.out.println("Subarray after modification:");
+		for (int i = 0; i < s.length(); ++i)
+			System.out.println("s[" + i + "]: " + s.get(i));
+
+		System.out.println("Array after modification:");
+		for (int i = 0; i < 5; ++i)
+			System.out.println("a[" + i + "]: " + a.get(i));
+
+		a.subSequence(0, 1).subSequence(0, 1).subSequence(0, 1).set(0, -10);
+		System.out.println("First element changed to: " + a.get(0));
+	}
+}

@@ -1,0 +1,13 @@
+
+class InvertedFilter implements Filter {
+	Filter filter;
+
+	public InvertedFilter(Filter filter) {
+		this.filter = filter;
+	}
+
+	@Override
+	public boolean pass(String s) {
+		return !filter.pass(s);
+	}
+}

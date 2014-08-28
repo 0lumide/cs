@@ -1,0 +1,17 @@
+
+/**
+ * A filter passes only the matching word (given via the constructor),
+ * but every other time, i.e. first, third, fifth, ..., (2k+1)-st time.
+ */
+public class MatchEveryOtherFilter implements Filter {
+	Filter inverted;
+
+	public MatchEveryOtherFilter(String word) {
+		// TODO implement
+	}
+
+	@Override
+	public boolean pass(String s) {
+		return inverted.pass(s);
+	}
+}
