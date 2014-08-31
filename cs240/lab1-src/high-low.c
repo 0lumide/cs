@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
   // Write your implementation here...
   while(continueLoop){
   high = 100;
-  low = 0;
+  low = 1;
     printf("Think of a number between 1 and 100 and press press <enter>\n");
     while(high >= low){
       mid = (high + low)/2;
@@ -19,10 +19,12 @@ int main(int argc, char **argv) {
       //scanf("%c\n\n",&c);
       //c = getchar();
       //getchar();
-      while((c = getchar() != EOF)) {
-        
+      c = getchar();
+      while(c == '\n') {
+        c = getchar();
       }
-      printf("This is the input: %c\n", c);
+      getchar();
+      //printf("This is the input: %c\n", c);
       if( c == 'y'){
         low = mid + 1;
       }
@@ -33,7 +35,7 @@ int main(int argc, char **argv) {
         printf("Type y or n\n");
       }
     }
-    printf("\n>>>>>> The number is %i\n", low);
+    printf("\n>>>>>> The number is %i\n\n", low);
     printf("Do you want to continue playing (y/n)?");
     c = getchar();
     getchar();
