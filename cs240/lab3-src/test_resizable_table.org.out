@@ -1,0 +1,20 @@
+Running test13
+
+======== Table =======
+currentElements=0 maxElements=10
+======== End Table =======
+Add George
+
+======== Table =======
+currentElements=1 maxElements=10
+0: "George" 98
+======== End Table =======
+Add Peter
+
+======== Table =======
+currentElements=2 maxElements=10
+0: "George" 98
+1: "Peter" 87
+======== End Table =======
+Peter's grade is: 87
+George's grade is: 98

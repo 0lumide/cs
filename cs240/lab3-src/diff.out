@@ -1,0 +1,17 @@
+9c9,10
+< currentElements=0 maxElements=10
+---
+> currentElements=1 maxElements=10
+> 0: "George" 98
+14c15,17
+< currentElements=0 maxElements=10
+---
+> currentElements=2 maxElements=10
+> 0: "George" 98
+> 1: "Peter" 87
+16,17c19,20
+< Peter's grade is: 0
+< George's grade is: 0
+---
+> Peter's grade is: 87
+> George's grade is: 98

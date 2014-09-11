@@ -1,0 +1,17 @@
+Running test13
+
+======== Table =======
+currentElements=0 maxElements=10
+======== End Table =======
+Add George
+
+======== Table =======
+currentElements=0 maxElements=10
+======== End Table =======
+Add Peter
+
+======== Table =======
+currentElements=0 maxElements=10
+======== End Table =======
+Peter's grade is: 0
+George's grade is: 0
