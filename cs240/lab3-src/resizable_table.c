@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-
+#define INITIAL_SIZE_RESIZEBLE_TABLE = 10;
 #include "resizable_table.h"
 
 //
