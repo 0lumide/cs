@@ -1,17 +1,13 @@
-Running test13
+Running test16
 
 ======== Table =======
 currentElements=0 maxElements=10
 ======== End Table =======
-Add George
+Read non existing table
+result1=0
+Read friends.rt
+result2=0
 
 ======== Table =======
 currentElements=0 maxElements=10
 ======== End Table =======
-Add Peter
-
-======== Table =======
-currentElements=0 maxElements=10
-======== End Table =======
-Peter's grade is: 0
-George's grade is: 0

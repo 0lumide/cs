@@ -1,0 +1,167 @@
+Running test4
+===== List =====
+nElements=0
+======== End List =======
+Adding 0
+Adding 1
+Adding 2
+Adding 3
+Adding 4
+Adding 5
+Adding 6
+Adding 7
+Adding 8
+Adding 9
+Adding 10
+Adding 11
+Adding 12
+Adding 13
+Adding 14
+Adding 15
+Adding 16
+Adding 17
+Adding 18
+Adding 19
+Adding 20
+Adding 21
+Adding 22
+Adding 23
+Adding 24
+Adding 25
+Adding 26
+Adding 27
+Adding 28
+Adding 29
+===== List =====
+nElements=30
+name="name0" value="address0"
+name="name1" value="address1"
+name="name2" value="address2"
+name="name3" value="address3"
+name="name4" value="address4"
+name="name5" value="address5"
+name="name6" value="address6"
+name="name7" value="address7"
+name="name8" value="address8"
+name="name9" value="address9"
+name="name10" value="address10"
+name="name11" value="address11"
+name="name12" value="address12"
+name="name13" value="address13"
+name="name14" value="address14"
+name="name15" value="address15"
+name="name16" value="address16"
+name="name17" value="address17"
+name="name18" value="address18"
+name="name19" value="address19"
+name="name20" value="address20"
+name="name21" value="address21"
+name="name22" value="address22"
+name="name23" value="address23"
+name="name24" value="address24"
+name="name25" value="address25"
+name="name26" value="address26"
+name="name27" value="address27"
+name="name28" value="address28"
+name="name29" value="address29"
+======== End List =======
+remove name5
+result1=1
+===== List =====
+nElements=29
+name="name0" value="address0"
+name="name1" value="address1"
+name="name2" value="address2"
+name="name3" value="address3"
+name="name4" value="address4"
+name="name6" value="address6"
+name="name7" value="address7"
+name="name8" value="address8"
+name="name9" value="address9"
+name="name10" value="address10"
+name="name11" value="address11"
+name="name12" value="address12"
+name="name13" value="address13"
+name="name14" value="address14"
+name="name15" value="address15"
+name="name16" value="address16"
+name="name17" value="address17"
+name="name18" value="address18"
+name="name19" value="address19"
+name="name20" value="address20"
+name="name21" value="address21"
+name="name22" value="address22"
+name="name23" value="address23"
+name="name24" value="address24"
+name="name25" value="address25"
+name="name26" value="address26"
+name="name27" value="address27"
+name="name28" value="address28"
+name="name29" value="address29"
+======== End List =======
+remove name18
+result2=1
+===== List =====
+nElements=28
+name="name0" value="address0"
+name="name1" value="address1"
+name="name2" value="address2"
+name="name3" value="address3"
+name="name4" value="address4"
+name="name6" value="address6"
+name="name7" value="address7"
+name="name8" value="address8"
+name="name9" value="address9"
+name="name10" value="address10"
+name="name11" value="address11"
+name="name12" value="address12"
+name="name13" value="address13"
+name="name14" value="address14"
+name="name15" value="address15"
+name="name16" value="address16"
+name="name17" value="address17"
+name="name19" value="address19"
+name="name20" value="address20"
+name="name21" value="address21"
+name="name22" value="address22"
+name="name23" value="address23"
+name="name24" value="address24"
+name="name25" value="address25"
+name="name26" value="address26"
+name="name27" value="address27"
+name="name28" value="address28"
+name="name29" value="address29"
+======== End List =======
+remove name64
+result3=0
+===== List =====
+nElements=28
+name="name0" value="address0"
+name="name1" value="address1"
+name="name2" value="address2"
+name="name3" value="address3"
+name="name4" value="address4"
+name="name6" value="address6"
+name="name7" value="address7"
+name="name8" value="address8"
+name="name9" value="address9"
+name="name10" value="address10"
+name="name11" value="address11"
+name="name12" value="address12"
+name="name13" value="address13"
+name="name14" value="address14"
+name="name15" value="address15"
+name="name16" value="address16"
+name="name17" value="address17"
+name="name19" value="address19"
+name="name20" value="address20"
+name="name21" value="address21"
+name="name22" value="address22"
+name="name23" value="address23"
+name="name24" value="address24"
+name="name25" value="address25"
+name="name26" value="address26"
+name="name27" value="address27"
+name="name28" value="address28"
+name="name29" value="address29"
+======== End List =======

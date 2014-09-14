@@ -1,4 +1,4 @@
-
+//#include <stdio.h>
 #include <stdlib.h>
 #include "mystring.h"
 
@@ -54,38 +54,46 @@ char * mystrstr(char * hay, char * needle) {
 	int i = 0; //needle looper
 	int j = 0; //hay looper
 	int h = 0; //index of first match
-	/*if(mystrlen(needle) == 0)
+	int j2 = 0; //inner hay looper
+	if(mystrlen(needle) == 0)
 	    return hay;
+	
 	while(hay[j] != '\0'){
+	    i = 0;
 	    if(hay[j] == needle[i]){
 	        h = j;
+		j2 = j;
 		while(needle[i] != '\0'){
-		    if((hay[j] == needle[i]&&(hay[j++] != '\0')))
-		        i++;
-	      	    else
-		    	return NULL;
-		}
-		return hay += h; 
+		    if((hay[j2] == needle[i])&&(hay[j2++] != '\0')){
+			if(needle[++i] == '\0')
+			    return hay += h;
+	      	    }
+		    else
+		    	break;
+	        }
 	    }
 	    j++;
 	}
-	*/
-	for(; i <= mystrlen(hay); i++){
-	    char substr[mystrlen(needle)+ 1];
-	    strncpy(substr
-	    if (mystrcmp(
-	}
 
-	return NULL;
+        return NULL;
 }
 
 char * mystrdup(char * s) {
-	return NULL;
+        char *rVal = malloc(sizeof(char)*(mystrlen(s)+1));
+	mystrcpy(rVal, s);
+	return rVal;
 }
 
 char * mymemcpy(char * dest, char * src, int n)
 {
-        
-	return NULL;
+	int i = 0;
+        for(; i < n; i++){
+	    dest[i] = src[i];
+	}
+	return dest;
 }
 
+/*int main(){
+        char *rVal = mystrstr("people pee", "pee");
+	printf("%s \n", rVal);
+}*/
