@@ -22,12 +22,12 @@ LINKED_LIST * llist_create() {
 	if (list->head == NULL) {
 		return NULL;
 	}
-	
-	
+
+
 	list->nElements = 0;
 	list->head->next = list->head;
 	list->head->previous = list->head;
-	
+
 	return list;
 }
 
@@ -41,7 +41,7 @@ LINKED_LIST * llist_create() {
 //======== End List =======
 //
 void llist_print(LINKED_LIST * list) {
-	
+
 	LINKED_LIST_ENTRY * e;
 
 	printf("===== List =====\n");
@@ -62,7 +62,24 @@ void llist_print(LINKED_LIST * list) {
 // list.
 //
 int llist_add(LINKED_LIST * list, char * name, char * value) {
-	return 0;
+	LINKED_LIST_ENTRY *e;
+
+	e = list->head;
+	while(e->next != list->head) {
+		if(!strcmp(e->next->name, name)){
+			e->next->value = strdup(value);
+			return 1;
+		}
+		e = e->next;
+	}
+	e->next = (LINKED_LIST_ENTRY *) malloc(sizeof(LINKED_LIST_ENTRY));
+	e->next->next = list->head;
+	e->next->previous = e;
+	list->head->previous = e->next;
+	list->nElements++;
+	e->next->name = strdup(name);
+	e->next->value = strdup(value);
+	return 1;
 }
 
 //
@@ -70,6 +87,14 @@ int llist_add(LINKED_LIST * list, char * name, char * value) {
 // name does not exist in the list.
 //
 char * llist_lookup(LINKED_LIST * list, char * name) {
+	LINKED_LIST_ENTRY *e;
+
+	e = list->head;
+	while(e->next != list->head){
+		if(!strcmp(e->next->name, name))
+			return e->next->value;
+		e = e->next;
+	}
 	return NULL;
 }
 
@@ -78,6 +103,23 @@ char * llist_lookup(LINKED_LIST * list, char * name) {
 // Also the name and value strings will be freed.
 //
 int llist_remove(LINKED_LIST * list, char * name) {
+	LINKED_LIST_ENTRY * e;
+	LINKED_LIST_ENTRY * x;
+
+	e = list->head;
+	while(e->next != list->head){
+		if(!strcmp(e->next->name, name)){
+			x = e->next;
+			free(x->name);
+			free(x->value);
+			x->next->previous = e;
+			e->next = e->next->next;
+			free(x);
+			list->nElements--;
+			return 1;
+		}
+		e = e->next;
+	}
 	return 0;
 }
 
@@ -86,14 +128,64 @@ int llist_remove(LINKED_LIST * list, char * name) {
 // the ith entry. It will return 1 if successful, or 0 otherwise.
 //
 int llist_get_ith(LINKED_LIST * list, int ith, char ** name, char ** value) {
-	return 0;
+
+	if(ith > list->nElements)
+		return 0;
+
+	LINKED_LIST_ENTRY * e;
+	int i = 0;
+	e = list->head;
+	while(e->next != list->head){
+		if(i == ith){
+			*name = e->next->name;
+			*value = e->next->value;
+			return 1;
+		}
+		e = e->next;
+		i++;
+	}
 }
 
+LINKED_LIST_ENTRY * llist_get_ith_ad(LINKED_LIST * list, int ith){
+	if(ith > list->nElements)
+		return NULL;
+
+	LINKED_LIST_ENTRY * e;
+	int i = 0;
+	e = list->head;
+	while(e->next != list->head){
+		if(i == ith){
+			return e->next;
+		}
+		e = e->next;
+		i++;
+	}
+
+}
 //
 // It removes the ith entry from the list.
 // Also the name/value strings are freed.
 //
 int llist_remove_ith(LINKED_LIST * list, int ith) {
+	LINKED_LIST_ENTRY * e;
+	LINKED_LIST_ENTRY * x;
+
+	int i = 0;
+	e = list->head;
+	while(e->next != list->head){
+		if(i == ith){
+			x = e->next;
+			free(x->name);
+			free(x->value);
+			x->next->previous = e;
+			e->next = e->next->next;
+			free(x);
+			list->nElements--;
+			return 1;
+		}
+		e = e->next;
+		i++;
+	}
 	return 0;
 }
 
@@ -101,7 +193,7 @@ int llist_remove_ith(LINKED_LIST * list, int ith) {
 // It returns the number of elements in the list.
 //
 int llist_number_elements(LINKED_LIST * list) {
-	return 0;
+	return list->nElements;
 }
 
 
@@ -119,22 +211,89 @@ int llist_number_elements(LINKED_LIST * list) {
 // Notice that there is an empty line between each name/value pair.
 //
 int llist_save(LINKED_LIST * list, char * file_name) {
-	return 0;
+	FILE * fd = fopen(file_name, "w");
+	if(fd == NULL)
+		return 0;
+
+	LINKED_LIST_ENTRY * e;
+
+	e = list->head;
+	while(e->next != list->head){
+		fprintf(fd, "%s\n%s\n\n", e->next->name, e->next->value);
+		e = e->next;
+	}
+	fclose(fd);
+	return 1;
 }
 
 //
 // It reads the list from the file_name indicated. If the list already has entries, it will
 // clear the entries.
 //
-int llist_read(LINKED_LIST * list, char * file_name) {
-	return 0;
+char * removeNewline(char *src){
+	char * dest;
+	char * temp = malloc(sizeof(char)*(strlen(src)));
+	strncpy(temp, src, strlen(src)-1);
+	dest = strdup(temp);
+	return dest;
 }
 
+int llist_read(LINKED_LIST * list, char * file_name) {
+	FILE * fd = fopen(file_name, "r");
+	if(fd == NULL)
+		return 0;
+	int maxline = 512;
+	LINKED_LIST_ENTRY * e;
+	char * str = malloc(sizeof(char) * maxline);
+	char * value;
+	char * name;
+	int lineCount = 0;
+
+	while(llist_remove_ith(list, 0)){}
+	e = list->head;
+
+	while(fgets(str, maxline, fd) != NULL){
+		if(!(lineCount % 3))
+			name = removeNewline(str);
+		else if(lineCount % 3 == 1)
+			value = removeNewline(str);
+		else
+			llist_add(list, name, value);
+		lineCount++;
+	}
+	fclose(fd);
+	return 1;
+}
 //
 // It sorts the list according to the name. The parameter ascending determines if the
 // order si ascending (1) or descending(0).
 //
 void llist_sort(LINKED_LIST * list, int ascending) {
+	LINKED_LIST_ENTRY * n; //next entry
+	LINKED_LIST_ENTRY * e;
+	int notSorted = 1;
+	int i;
+
+	while(notSorted){
+		notSorted = 0;
+		i = 0;
+		e = llist_get_ith_ad(list, i);//list->head->next;
+		while(e->next != list->head){
+			n = e->next;
+			if( ascending?(strcmp(n->name, e->name) < 0): (strcmp(e->name, n->name) < 0)){
+				//switch
+				n->previous = e->previous;
+				e->next = n->next;
+				n->next->previous = e;
+				n->next = e->previous->next;
+				e->previous->next = n;
+				e->previous = n;//(llist_get_ith_ad(list, i))->next;
+
+				notSorted = 1;
+			}
+			e = llist_get_ith_ad(list, ++i);
+		}
+	}
 }
 
 //
@@ -143,7 +302,7 @@ void llist_sort(LINKED_LIST * list, int ascending) {
 // It also frees memory allocated for name and value.
 //
 int llist_remove_first(LINKED_LIST * list) {
-	return 0;
+	return llist_remove_ith(list, 0);
 }
 
 //
@@ -151,7 +310,7 @@ int llist_remove_first(LINKED_LIST * list) {
 // It also frees memory allocated for name and value.
 //
 int llist_remove_last(LINKED_LIST * list) {
-	return 0;
+	return llist_remove_ith(list, list->nElements -1);
 }
 
 //
@@ -160,7 +319,18 @@ int llist_remove_last(LINKED_LIST * list) {
 // at the beginning of the list.
 //
 int llist_insert_first(LINKED_LIST * list, char *name, char * value) {
-	return 0;
+	LINKED_LIST_ENTRY *e;
+
+	e = list->head->next;
+	e->previous = (LINKED_LIST_ENTRY *) malloc(sizeof(LINKED_LIST_ENTRY));
+	e->previous->next = e;
+	e->previous->previous = list->head;
+	list->head->next = e->previous;
+	list->nElements++;
+	e->previous->name = strdup(name);
+	e->previous->value = strdup(value);
+	return 1;
+
 }
 
 //
@@ -169,6 +339,20 @@ int llist_insert_first(LINKED_LIST * list, char *name, char * value) {
 // at the end of the list.
 //
 int llist_insert_last(LINKED_LIST * list, char *name, char * value) {
-	return 0;
+	LINKED_LIST_ENTRY *e;
+
+	e = list->head->previous;
+	while(e->next != list->head) {
+		e = e->next;
+	}
+	e->next = (LINKED_LIST_ENTRY *) malloc(sizeof(LINKED_LIST_ENTRY));
+	e->next->next = list->head;
+	e->next->previous = e;
+	list->head->previous = e->next;
+	list->nElements++;
+	e->next->name = strdup(name);
+	e->next->value = strdup(value);
+	return 1;
+
 }
 
