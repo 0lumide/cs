@@ -1,0 +1,24 @@
+
+
+-------------------------------------------------
+CS240: Lab 4. cs240   
+Sun Oct  5 23:30:24 EDT 2014
+-------------------------------------------------
+./gauss                             : 0   of 6  
+./gauss   < gauss0.txt              : 0   of 6  
+./gauss   < gauss1.txt              : 0   of 6  
+./gauss   < gauss2.txt              : 0   of 6  
+./gauss   < gauss3.txt              : 0   of 6  
+./gauss   < gauss4.txt              : 0   of 6  
+./gauss   < gauss5.txt              : 0   of 7  
+./gauss   < gauss6.txt              : 0   of 7  
+./newton                            : 0   of 7  
+./newton pol 1                      : 0   of 7  
+./newton poly1 1                    : 0   of 7  
+./newton sin 0                      : 0   of 7  
+./newton xsin 0                     : 0   of 7  
+./newton poly2 0                    : 0   of 7  
+./newton imaginary 4                : 0   of 8  
+-------------------------------------------------
+CS240: Lab 4. cs240 Sun Oct 5 23:30:24 EDT 2014  Total:  0 of 100
+
