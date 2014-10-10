@@ -2,7 +2,7 @@
 all: gauss newton
 
 gauss: gauss.c
-	gcc -g -o gauss gauss.c
+	gcc -g -o gauss gauss.c -lm
 
 newton: newton.c
 	gcc -lm -g -o newton newton.c

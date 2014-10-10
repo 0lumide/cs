@@ -1,0 +1,60 @@
+This README contains instructions for logging into lore.cs.purdue.edu,
+copying files from a local host to a remote host, compiling and running
+Sort.java, and submitting Sort.java via turnin.  These instructions 
+assume you are using a Unix terminal.  If you are using Windows, you
+can use PuTTY[1] to connect to lore.cs.purdue.edu and use WinSCP[2] 
+to copy files from your local machine to lore.cs.purdue.edu.
+
+[1] http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
+[2] http://winscp.net/download/winscp555.zip
+
+
+Login to lore.cs.purdue.edu
+
+	ssh [user@]lore.cs.purdue.edu
+
+Make cs182/hw5 directory
+
+	mkdir -p cs182/hw5
+
+Close connection to lore.cs.purdue.edu
+
+	exit
+
+Change directory to local directory which holds Sort.java and data.txt
+
+	cd ~/PATH/TO/CS182/HW5
+
+Copy Sort.java to lore.cs.purdue.edu
+
+	scp Sort.java [user@]lore.cs.purdue.edu:cs182/hw5/Sort.java
+
+Copy data.txt to lore.cs.purdue.edu
+
+	scp data.txt [user@]lore.cs.purdue.edu:cs182/hw5/data.txt
+
+Login to lore.cs.purdue.edu
+
+	ssh [user@]lore.cs.purdue.edu
+
+Change directory to remote directory that holds Sort.java and data.txt
+
+	cd cs182/hw5
+
+Compile Sort:
+
+	javac Sort.java
+
+Run Sort
+Example: Shaker sort the list in data.txt, output the sorted list:
+
+	java Sort -s < data.txt
+
+Example: Insertion sort the list in data.txt, output the number of comparisons and the timing:	
+
+	java Sort -ict < data.txt
+
+Turnin Sort.java
+
+	turnin -c cs182 -p hw5 Sort.java
+
