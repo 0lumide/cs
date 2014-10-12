@@ -1,4 +1,4 @@
-Running test4
+Running test12
 ===== List =====
 nElements=0
 ======== End List =======
@@ -35,18 +35,29 @@ Adding 29
 ===== List =====
 nElements=0
 ======== End List =======
-remove name5
-result1=0
+Adding first 40
+Adding first 41
+Adding first 42
+Adding first 43
+Adding first 44
+Adding first 45
+Adding first 46
+Adding first 47
+Adding first 48
+Adding first 49
 ===== List =====
 nElements=0
 ======== End List =======
-remove name18
-result2=0
-===== List =====
-nElements=0
-======== End List =======
-remove name64
-result3=0
+Adding 50
+Adding 51
+Adding 52
+Adding 53
+Adding 54
+Adding 55
+Adding 56
+Adding 57
+Adding 58
+Adding 59
 ===== List =====
 nElements=0
 ======== End List =======
