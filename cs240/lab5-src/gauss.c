@@ -1,11 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#define MAXROWS 100
+#include <stdio.h
 #define MAXCOLS 101
 
 void printMatrix(int rows, int columns, double matrix[][MAXCOLS]);
+char * getInput();
+int isNum();
+int charToNum();
+int strIsNum(char * str);
+void printMissingEl(int i, int j);
+
 
 /* Add helper functions and global variables here */
 void printMissingEl(int i, int j){
@@ -31,26 +33,33 @@ int strIsNum(char * str){
 		return 0;
 	return 1;
 }
-double** getInput(int * col, int * row){
+//double** getInput(int * col, int * row){
+char * getInput(){
 	char * temp = malloc(sizeof(char)*2);
-	size_t limit = 1;
-	int size = -1;
 	int i;
 	int j;
 	char c;
 	double notNewNum;
 	char ** input;
 	double num;
-	int totCount = 1;
+	int started = 0;
+	int count = 0;
 
 	//Begin new method
-	while((count < totCount)){
-		if(size == -1){
-			
+	while((c = getchar())!=EOF)//((count < totCount)){
+		if(!started){
+			i	f((c != ' ') && (c != ' ')){
+			}
+		}
+		else{
+			count++;
 		}
 	}
-	//End new method
+	return str;
+}
 
+//double** getInput(int * col, int * row){
+	//End new method
 	/*getline(&temp, &limit, stdin);
 	while(strcmp(temp, "\n") == 0){
 		getline(&temp, &limit, stdin);

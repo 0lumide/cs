@@ -22,7 +22,7 @@ public class Sort {
 	public static int insertionSort(int[] a) {
 		// INSERTION SORT
 		int count = 0;
-		for(int i = 0; i < a.length; i++){
+		for(int i = 1; i < a.length; i++){
 			for(int j = 0; j < i - 1; j++){
 				if(a[i] < a[j]){
 					//swap
