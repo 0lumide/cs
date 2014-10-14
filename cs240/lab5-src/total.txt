@@ -1,7 +1,7 @@
-./gauss                             : 0   of 6  
-./gauss   < gauss0.txt              : 0   of 6  
+./gauss                             : 6   of 6  
+./gauss   < gauss0.txt              : 6   of 6  
 ./gauss   < gauss1.txt              : 0   of 6  
-./gauss   < gauss2.txt              : 0   of 6  
+./gauss   < gauss2.txt              : 6   of 6  
 ./gauss   < gauss3.txt              : 0   of 6  
 ./gauss   < gauss4.txt              : 0   of 6  
 ./gauss   < gauss5.txt              : 0   of 7  

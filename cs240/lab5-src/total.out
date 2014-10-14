@@ -1,13 +1,13 @@
 
 
 -------------------------------------------------
-CS240: Lab 4. cs240   
-Sun Oct  5 23:30:24 EDT 2014
+CS240: Lab 4. oawofeso   
+Mon Oct 13 23:26:24 EDT 2014
 -------------------------------------------------
-./gauss                             : 0   of 6  
-./gauss   < gauss0.txt              : 0   of 6  
+./gauss                             : 6   of 6  
+./gauss   < gauss0.txt              : 6   of 6  
 ./gauss   < gauss1.txt              : 0   of 6  
-./gauss   < gauss2.txt              : 0   of 6  
+./gauss   < gauss2.txt              : 6   of 6  
 ./gauss   < gauss3.txt              : 0   of 6  
 ./gauss   < gauss4.txt              : 0   of 6  
 ./gauss   < gauss5.txt              : 0   of 7  
@@ -20,5 +20,5 @@ Sun Oct  5 23:30:24 EDT 2014
 ./newton poly2 0                    : 0   of 7  
 ./newton imaginary 4                : 0   of 8  
 -------------------------------------------------
-CS240: Lab 4. cs240 Sun Oct 5 23:30:24 EDT 2014  Total:  0 of 100
+CS240: Lab 4. oawofeso Mon Oct 13 23:26:24 EDT 2014  Total:  18 of 100
 
