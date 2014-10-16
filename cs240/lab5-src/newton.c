@@ -13,8 +13,48 @@ void printFunction();
 
 int main(int argc, char** argv)
 {
+	double start;
+	double guess;
+	double slope;
+	if(argc == 1){
+		printf("Usage: newton <poly1|sin|xsin|poly2|imaginary> <initial guess>\n");
+		exit(1);
+	}
+	char * funcName = argv[1];
+	start = atof(argv[2]);
+	printFunction(funcName);
+	int count = 0;
+	guess = f(funcName, start);
+	slope = fPrime(funcName, start);
+	printf("At iteration %d, x=%f, y=%f, y'=%f\n", count, start, guess, slope);
+	count++;
 	/* Add your implementation here */
+	while((count <= MAX_ITER) && (fabs(guess) > TOLERANCE)){
+		//check for error
+		if(fabs(slope) < TOLERANCE){
+			printf("Error: at x=%f, f'(x)=0\n", start);
+			exit(0);
+		}
+		start = start - guess/slope;
+		guess = f(funcName, start);
+		slope = fPrime(funcName, start);
 
+		printf("At iteration %d, x=%f, y=%f,", count, start, guess);
+		if((!(count < MAX_ITER)) || (!(fabs(guess) > TOLERANCE))){
+			if(count != 12)
+				printf(" and");
+			count++;//To exit the while loop
+		}
+		else{
+			count++;
+		}
+		printf(" y'=%f\n",slope);
+	}
+	if(count == 13){
+		printf("Error: after %d iterations, x=%f and f(x)=%f\n", MAX_ITER, start, guess);
+	}
+	else
+		printf("Solution: iteration=%d x=%f y=%f\n", count - 1, start, guess);
 	return 0;
 }
 

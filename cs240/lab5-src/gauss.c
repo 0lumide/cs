@@ -142,8 +142,9 @@ int main()
 		int maxPos = i;
 		//find the maximum value of abs(r[j][i]) where j >= i
 		for(j = i + 1; j < rowNum; j++){
-			if(abs(mat[j][i]) > abs(mat[maxPos][i]))
+			if(fabs(mat[j][i]) > fabs(mat[maxPos][i])){
 				maxPos = j;
+			}
 		}
 		// this makes the pivot nonzero if possible
 		int isSingular = 1;
