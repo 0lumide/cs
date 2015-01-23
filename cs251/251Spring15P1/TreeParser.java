@@ -7,10 +7,54 @@ public class TreeParser {
 	
 	public static String getCleanedString(String text) {
 		/* TODO: strip blanks in 'text' */
+		int len = text.length();
+		int j = 0;
+		char[] goodChars = new char[len];
+
+		for(int i = 0; i < len; i++){
+			char c = text.charAt(i);
+			if(isAllowedChar(c)){
+				goodChars[j] = c;
+				j++;
+			}
+		}
+		return new String(goodChars, 0, j);
+
 	}
-	
+	/* Start helper functions*/
+	private static boolean isAlllowedChar(char c){
+		if(c == '(')
+			return true;
+		else if(c == ')')
+			return true;
+		else if(c == ',')
+			return true;
+		else
+			return(isAlpha(c) || is Number(c));
+	}
+	private static boolean isAlpha(char c){
+		return(((c >= 'a')&&(c <= 'z'))||((c >= 'A')&&(c <= 'Z')));
+	}
+	private static boolean isNumber(char c){
+		return((c >= '0')&&(c <= '9'));
+	}
+	private static int getValue(String s){
+		String str = s.substring(1, s.length() - 1);
+		int end = 0;
+		for(int i = 0; i < str.length; i++){
+			if(isNumber(str.charAt(i)))
+				end++;
+			else
+				break;
+		}
+		String valueString = str.substring(0, end);
+		return Interger.paseInt(valueString);
+	}
+	/* End helper functions */
 	public static Node createTree(String treeRepresentationText) {
 		/* TODO: build the tree by parsing 'treeRepresentationText' */
+		String value, left, right;
+
 	}
 	
 	public static String traversePath(Node root, String direction) {
