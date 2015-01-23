@@ -3,6 +3,13 @@ import java.util.Scanner;
 public class MaxFind {
 	private static int getMaxVal(int[] arr) {
 		/* TODO: Find the maximum integer in 'arr' and return it */
+		int max = arr[0];
+		int len = arr.length;
+		for(int i = 1; i < len; i++){
+			if(arr[i] > max)
+				max = arr[i];
+		}
+		return max;
 	}
 	
 	public static void main(String args[]) {
