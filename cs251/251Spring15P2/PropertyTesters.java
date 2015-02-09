@@ -1,9 +1,29 @@
+import java.lang.Math;
 public class PropertyTesters {
-	
+
+	 /* This tests if the 'songs' array is a valid heap */
 	public static boolean testForHeapness (Song[] songs) {
-		/* TODO write code to test if the 'songs' array is a valid heap */
+		int parentIndex; //Position of the nodes parent in the array
+		int parentPlayCount; //Number of times the parent song has been played
+		int songPlayCount; //Number of times the song has been played
+		for(int i = songs.length - 1; i > 0; i--){
+			parentIndex = Math.floor((i - 1)/2);
+			parentPlayCount = songs[parentIndex].getNumberOfTimesPlayedSoFar;
+			songPlayCount = songs[i].getNumberOfTimesPlayedSoFar;
+			//Check if leaf value is greater than its parents value
+			if(songPlayCount > parentPlayCount){
+				return false;
+			}
+			//Check if values are equal, then if ordered by id
+			else if(songPlayCount == parentPlayCount){
+				if(songs[i].getSongID > songs[parentIndex].getSongID){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
-	
+
 	public static boolean testDataConsistency (SongsRecord record) {
 		int numberOfSongs = record.getNumberOfSongs();
 		Song[] songsHeap = record.getHeapOfSongs();
