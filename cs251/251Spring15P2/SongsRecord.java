@@ -35,17 +35,6 @@ public class SongsRecord {
 	}
 	
 	//helper function
-	private int getParentIndex(int i){
-		return (i - 1)/2; //No need use floor since integer operation
-	}
-
-	private int getLeftChildIndex(int i){
-		return (i*2 + 1);
-	}
-
-	private int getRightChildIndex(int i){
-		return (i*2 + 2);
-	}
 
 	//This function basically treats the subarray from stop to the end as a heap and heapifies it, thereby pushing the max value in the subarray to the stop index
 	private void heapifyNTabulate(int index, int stop){
@@ -57,6 +46,7 @@ public class SongsRecord {
 		//Compare to parent, and swap if necessary
 		if(songsHeap[index].getNumberOfTimesPlayedSoFar() > songsHeap[parentIndex].getNumberOfTimesPlayedSoFar()){
 			//swap
+			//I do not use songsCount in this method because, it's this method that initailizes it
 			Song temp = songsHeap[parentIndex];
 			songsHeap[parentIndex] = songsHeap[index];
 			songsHeap[index] = temp;
@@ -80,23 +70,32 @@ public class SongsRecord {
 
 		//Start the recursive heapifyNTabulate function from the last leaf;
 		for(int i = 0; i<songsHeap.length; i++){
-			for(int o = 0; o < this.getHeapOfSongs().length; o++){
-                                System.out.printf("%d ", this.getHeapOfSongs()[o].getNumberOfTimesPlayedSoFar());
-                        }
-			System.out.println("");
-
 			heapifyNTabulate(songsHeap.length - 1, i); //This pushes the largest node to the index position i 
 		}
 	}
 	
 	public void addSongOccurrence(int songID) {
-		/* TODO Write code to:
-			(1) Read 'songsPosition' and get the position of the song in the heap. Then increase the count by 1. After increasing the count by 1, move the song up if required and ensure that the heap invariant is maintained.
-			(2) Modify 'songsPosition' and 'songsCount' accordingly to ensure that everything is consistent.
-		*/
+		int bigger, smaller, biggerSongID;
 		int index = songsPosition[songID];
 		songsHeap[index].increasePlayedCountByOne();
-		heapifyNTabulate(index, 0);
+		songsCount[songID]++;
+		//Since the array would have been sorted right before the modification, I only have to find remove and insert the modifies song to its new position if need be then update the positions of the songs after it, if need be
+		//Check if now bigger than previously bigger one
+		if(index > 0){// Doesn't bother if song was previously the most played
+			biggerSongID = songsHeap[index - 1].getSongID();
+			bigger = songsCount[biggerSongID];
+			smaller = songsCount[songID];
+			Song temp = songsHeap[index];
+			biggerSongID = songsHeap[index - 1].getSongID();
+			if((bigger < smaller)||((bigger == smaller)&&(biggerSongID > songID))){
+				//swap
+				songsHeap[index] = songsHeap[index - 1];
+				songsHeap[index - 1] = temp;
+				//Update songsPosition
+				songsPosition[biggerSongID]++;
+				songsPosition[songID]--;
+			}
+		}
 	}
 
 	public String getTopTwo() {
