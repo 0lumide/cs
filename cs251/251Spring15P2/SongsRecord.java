@@ -35,11 +35,24 @@ public class SongsRecord {
 	}
 	
 	//helper function
-	private void heapifyNTabulate(int index){
-		int parentIndex = (index - 1)/2; //No need to floor the result because integer operation
+	private int getParentIndex(int i){
+		return (i - 1)/2; //No need use floor since integer operation
+	}
+
+	private int getLeftChildIndex(int i){
+		return (i*2 + 1);
+	}
+
+	private int getRightChildIndex(int i){
+		return (i*2 + 2);
+	}
+
+	//This function basically treats the subarray from stop to the end as a heap and heapifies it, thereby pushing the max value in the subarray to the stop index
+	private void heapifyNTabulate(int index, int stop){
+		int parentIndex = (index - 1 - stop)/2 + stop; //No need to floor the result because integer operation
 
 		//Check if parent exists
-		if(parentIndex < 0)
+		if(parentIndex < stop)
 			return;
 		//Compare to parent, and swap if necessary
 		if(songsHeap[index].getNumberOfTimesPlayedSoFar() > songsHeap[parentIndex].getNumberOfTimesPlayedSoFar()){
@@ -49,7 +62,7 @@ public class SongsRecord {
 			songsHeap[index] = temp;
 		}
 		else if(songsHeap[index].getNumberOfTimesPlayedSoFar() == songsHeap[parentIndex].getNumberOfTimesPlayedSoFar()){
-			//Didn't seperated the if else if and if statements for readability/clarity purposes
+			//Seperated the if else if and if statements for readability/clarity purposes
 			if(songsHeap[index].getSongID() < songsHeap[parentIndex].getSongID()){
 				//swap
 				Song temp = songsHeap[parentIndex];
@@ -60,11 +73,20 @@ public class SongsRecord {
 		//Store song play count;
 		songsCount[songsHeap[index].getSongID()] = songsHeap[index].getNumberOfTimesPlayedSoFar();
 		songsPosition[songsHeap[index].getSongID()] = index;
-		heapifyNTabulate(index - 1);
+		heapifyNTabulate(index - 1, stop);
 	}
 	public void process() {
+		//Since a sorted array is also a max heap I'll be sorting the array. I'll be using heap sort ironically
+
 		//Start the recursive heapifyNTabulate function from the last leaf;
-		heapifyNTabulate(songsHeap.length - 1);
+		for(int i = 0; i<songsHeap.length; i++){
+			for(int o = 0; o < this.getHeapOfSongs().length; o++){
+                                System.out.printf("%d ", this.getHeapOfSongs()[o].getNumberOfTimesPlayedSoFar());
+                        }
+			System.out.println("");
+
+			heapifyNTabulate(songsHeap.length - 1, i); //This pushes the largest node to the index position i 
+		}
 	}
 	
 	public void addSongOccurrence(int songID) {
@@ -74,7 +96,7 @@ public class SongsRecord {
 		*/
 		int index = songsPosition[songID];
 		songsHeap[index].increasePlayedCountByOne();
-		heapifyNTabulate(index);
+		heapifyNTabulate(index, 0);
 	}
 
 	public String getTopTwo() {
