@@ -26,12 +26,7 @@ public class HitSongs {
 			}
 			
 			record.process();
-			System.out.println("Start");
-			for(int o = 0; o < record.getHeapOfSongs().length; o++){
-				System.out.printf("%d ", record.getHeapOfSongs()[o].getNumberOfTimesPlayedSoFar());
-			}
-			System.out.println("End");
-			System.out.println(PropertyTesters.testForHeapness(record.getHeapOfSongs()));
+						
 			assert PropertyTesters.testForHeapness(record.getHeapOfSongs());
 			assert PropertyTesters.testDataConsistency(record);
 
