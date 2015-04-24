@@ -90,7 +90,8 @@ public class Polynomial {
 	}
 	
 	//Helper function
-	private ListRepresentation linkifyPostfixList(ArrayList <ListRepresentation> linkRepresentation){
+	private ListRepresentation linkifyPostfixList(){
+		ListRepresentation listRepresentation = new ListRepresentation();
 		String lastOp = "";
 		int operandCount = 1;
 		ExpressionAtom expressionAtom;
@@ -99,7 +100,7 @@ public class Polynomial {
 			if(expressionAtom.getAtomType() == AtomType.OPERATOR){
 				if(lastOp.equals("")){
 					listRepresentation.setNodeVal(expressionAtom);
-					if("-".equals(expressionAtom.getVariablesOrOperator())){
+					if("-".equals(expressionAtom.getVariablesOrOperator()))
 						listRepresentation.setNegative(true);
 					lastOp = expressionAtom.getVariablesOrOperator();
 				}
@@ -107,8 +108,9 @@ public class Polynomial {
 					operandCount--;
 				}
 				else{
+					ListRepresentation listRep = new ListRepresentation();
 					postfixStack.push(expressionAtom);
-					linkRepresentation.operands.add(LinkifyPostfixList(linkRepresentation.operands));
+					listRepresentation.operands.add(linkifyPostfixList());
 				}
 				lastOp = expressionAtom.getVariablesOrOperator();
 			}
@@ -120,9 +122,9 @@ public class Polynomial {
 				else{
 					operandCount++;
 					if(operandCount <= 2){
-						linkRep = new LinkRepresentation();
-						linkRep.setNodeVal(expressionAtom);
-						linkRepresentation.operands.add(linkRep);
+						ListRepresentation listRep = new ListRepresentation();
+						listRep.setNodeVal(expressionAtom);
+						listRepresentation.operands.add(listRep);
 					}
 					else{
 						postfixStack.push(expressionAtom);
@@ -133,6 +135,7 @@ public class Polynomial {
 		}
 		return listRepresentation;
 	}
+
 	private ListRepresentation convertToListRepresentation() {
 		/*
 		 * TODO: Write code here to operate on this.infixExpression and obtain a ListRepresentation
@@ -144,8 +147,7 @@ public class Polynomial {
 		Stack stack = new Stack();
 		postfixStack = new Stack();
 		ExpressionAtom expressionAtom;
-		ListRepresentation listRepresentation = new ListRepresentation();
-		
+				
 		List<ExpressionAtom> postfixExpression = new ArrayList<ExpressionAtom>();
 		List<ExpressionAtom> localInfix = this.infixExpression;
 		Collections.reverse(localInfix);
@@ -171,7 +173,7 @@ public class Polynomial {
 			}
 		}
 		while(!stack.empty()){
-			expressionAtom = stack.pop();
+			expressionAtom = (ExpressionAtom) stack.pop();
 			postfixExpression.add(expressionAtom);
 			postfixStack.push(expressionAtom);
 		}
@@ -179,19 +181,19 @@ public class Polynomial {
 		it = postfixExpression.iterator();
 
 		String lastOperator = "";
-		System.out.println("prefix");
+		//System.out.println("prefix");
 		while(it.hasNext()){
 			expressionAtom = it.next();
                         if(expressionAtom.getAtomType() == AtomType.OPERATOR){
-				System.out.printf("%s\n", expressionAtom.getVariablesOrOperator());
+				//System.out.printf("%s\n", expressionAtom.getVariablesOrOperator());
 				lastOperator = expressionAtom.getVariablesOrOperator();
                         }
                         else{   
-                                System.out.printf("%s %s\n", expressionAtom.getCoefficient(), expressionAtom.getVariablesOrOperator());
+                               // System.out.printf("%s %s\n", expressionAtom.getCoefficient(), expressionAtom.getVariablesOrOperator());
                         }
 
 		}
-		return linkifyPostfixList(listRepresentation);
+		return linkifyPostfixList();
 	}
 			
 	private List<ExpressionAtom> evaluateExpression() {
