@@ -1,0 +1,8 @@
+Test Case 1: (x+y)^2
+prefix
+^
++
+1 x
+1 y
+2 
+	[
