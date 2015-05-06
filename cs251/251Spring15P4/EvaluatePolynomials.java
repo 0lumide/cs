@@ -55,7 +55,12 @@ public class EvaluatePolynomials {
 			});
 
 			System.out.print("\t");
+			try{
 			Utils.printOutputExpression(inputPolynomial.finalExpression);	
+			}
+			catch (Exception e){
+				System.out.println(e.getMessage());
+			}
 		}
 		
 		in.close();
